@@ -5,16 +5,22 @@ package model;
 public class Aluno {
     /**
      */
-    private final double media = 7.0;
+    private static final double MEDIA = 7.0;
+    /**
+     */
+    private static String aprovado = "Aprovado";
+    /**
+     */
+    private static String as = "As";
+    /**
+     */
+    private static String reprovado = "Reprovado";
     /**
      */
     private double ap1;
     /**
      */
     private double ap2;
-    /**
-     */
-    private double avs;
     /**
      */
     private String status;
@@ -33,33 +39,38 @@ public class Aluno {
      *
      */
     public void avaliar1() {
-        if ((this.ap1 + this.ap2) / 2 < media) {
-            this.status = "AS";
+        if ((this.ap1 + this.ap2) / 2 < MEDIA) {
+            this.status = as;
         } else {
             this.status = "Aprovado";
         }
     }
     /**
      *
-     * @param aavs avaliação substitutiva.
+     * @param avs avaliação substitutiva.
      */
-    public void avaliar2(final double aavs) {
-        this.avs = aavs;
-        if (this.ap1 < this.ap2 && this.avs > this.ap1) {
-            if ((this.avs + this.ap2) / 2 < media) {
-                this.status = "Reprovado";
-            } else {
-                this.status = "Aprovado";
-            }
-        } else if(this.avs > this.ap2) {
-            if ((this.avs + this.ap1) / 2 < media) {
-                this.status = "Reprovado";
-            } else {
-                this.status = "Aprovado";
-            }
+    public void avaliar2(final double avs) {
+        double melhorNota = 0;
+        double menorNota = 0;
+        if (this.ap1 > this.ap2) {
+            melhorNota = this.ap1;
+            menorNota = this.ap2;
         } else {
-            this.status = "Reprovado";
+            melhorNota = this.ap2;
+            menorNota = this.ap1;
         }
+        if (avs < menorNota) {
+            status = reprovado;
+        } else {
+            double novaMedia = (melhorNota + avs) / 2;
+            if (novaMedia >= MEDIA) {
+                status = aprovado;
+            } else {
+                status = reprovado;
+            }
+        }
+
+
     }
 
     /**
