@@ -28,7 +28,7 @@ public class Programa {
 
         Aluno felipe = new Aluno(ap1, ap2);
         felipe.avaliar1();
-        felipe.avaliar2(2);
+        felipe.avaliar2(4);
 
         LOGGER.info("Status do aluno: " + felipe.getStatus());
     }

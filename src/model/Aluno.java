@@ -52,23 +52,26 @@ public class Aluno {
     public void avaliar2(final double avs) {
         double melhorNota = 0;
         double menorNota = 0;
-        if (this.ap1 > this.ap2) {
-            melhorNota = this.ap1;
-            menorNota = this.ap2;
-        } else {
-            melhorNota = this.ap2;
-            menorNota = this.ap1;
-        }
-        if (avs < menorNota) {
-            status = reprovado;
-        } else {
-            double novaMedia = (melhorNota + avs) / 2;
-            if (novaMedia >= MEDIA) {
-                status = aprovado;
+        if (this.status.equals(as)) {
+            if (this.ap1 > this.ap2) {
+                melhorNota = this.ap1;
+                menorNota = this.ap2;
             } else {
+                melhorNota = this.ap2;
+                menorNota = this.ap1;
+            }
+            if (avs < menorNota) {
                 status = reprovado;
+            } else {
+                double novaMedia = (melhorNota + avs) / 2;
+                if (novaMedia >= MEDIA) {
+                    status = aprovado;
+                } else {
+                    status = reprovado;
+                }
             }
         }
+
 
 
     }
